@@ -1,0 +1,30 @@
+
+.text
+  &-c
+    text-align: center
+  &-l
+    text-align: left
+  &-r
+    text-align: right
+  &-j
+    text-align: justify
+
+.float
+  &-l
+    float: left
+  &-r
+    float: right
+
+.no-float
+  float: none
+
+.clearfix
+  &::after
+    content: "."
+    display: table
+    height: 0
+    clear: both
+    visibility: hidden
+
+.hidden
+  display: none
