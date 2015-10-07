@@ -1,7 +1,8 @@
 'use strict';
 
-var srcDir = './src',
-    pubDir = './public',
+var srcDir = './kit-src',
+    buildDir = './build',
+    pubDir = './www',
     kitPrefix = 'sst-',
 
     // Plugin definition
@@ -25,10 +26,10 @@ var path = {
     },
 
     out: { // Output path
-        js: pubDir + '/js',
-        css: pubDir + '/css',
-        img: pubDir + '/images',
-        fonts: pubDir + '/fonts'
+        js: buildDir + '/js',
+        css: buildDir + '/css',
+        img: buildDir + '/images',
+        fonts: buildDir + '/fonts'
     }
 };
 
@@ -96,16 +97,6 @@ gulp.task('compile:js', function () {
         .pipe(plugins.livereload());
 });
 
-// Concat vendor JS
-gulp.task('compile-vendor:js', function () {
-    return gulp.src([
-            path.src.js + '/vendor/**/*.js'
-        ])
-        .pipe(plugins.concat('vendor.js'))
-        .pipe(gulp.dest(path.out.js))
-        .pipe(plugins.livereload());
-});
-
 // Minify JS
 gulp.task('minify:js', function () {
     return gulp.src([
@@ -130,15 +121,22 @@ gulp.task('minify:images', function () {
 
 // Clean
 gulp.task('clean', function () {
-    return del([ pubDir ]);
+    return del([ buildDir ]);
+});
+
+// Publication
+gulp.task('pub', function () {
+  return gulp.src( buildDir + '/**/*' )
+    .pipe(gulp.dest( pubDir ));
 });
 
 // Builder
 gulp.task('build', function (cb) {
     // runSequence позволяет запускать задачи по порядку
     runSequence('clean', // 1 выполнится первым
-        ['compile:css', 'compile:js', 'compile-vendor:js'], // 2 (таски выполнятся впараллель)
-        ['minify:css', 'minify:js', 'minify:images'] // 3
+        ['compile:css', 'compile:js'], // 2 (таски выполнятся впараллель)
+        ['minify:css', 'minify:js'], // 3
+        ['pub']
     );
 });
 
@@ -153,9 +151,9 @@ gulp.task('default', function () {
     gulp.watch([
         srcDir + '/**/*.styl',
         srcDir + '/**/*.css'
-    ], ['compile:css']);
+    ], runSequence('compile:css', 'pub'));
 
     // JS watcher
-    gulp.watch(srcDir + '/**/*.js', ['compile:js']);
+    gulp.watch(srcDir + '/**/*.js', runSequence('compile:js', 'pub'));
 
 });

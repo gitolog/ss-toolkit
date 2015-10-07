@@ -1,5 +1,12 @@
 /node_modules
-/public
+/build
+/lib
+/src
+/www
 /CVS
-.cvsignore
 /.idea
+.cvsignore
+deploy.properties
+*.iml
+*.ipr
+*.iws
