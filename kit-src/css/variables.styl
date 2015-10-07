@@ -1,0 +1,49 @@
+
+$font-family = Roboto, Arial, sans-serif
+$font-multiplier = 1.2
+
+$font-size = {
+  text : 16px,
+}
+$font-size = merge($font-size,{
+  text-less : ceil($font-size.text / $font-multiplier)
+  text-large : ceil($font-size.text * $font-multiplier)
+})
+
+$colors = {
+
+  text : {
+    main : gray,// основной текст
+    light : silver,// светлый текст
+    dark : black,// темный текст
+  }
+
+/*  title : {
+    main : $colors.text.main,// заголовковки
+    light : $colors.text.light,// заголовковки светлые
+    dark : $colors.text.dark,// заголовки темные
+  }*/
+
+}
+
+$bg-color = {
+  main : '',// основной фон
+  light : '',// светлый фон
+  dark : '',// темный фон
+}
+
+$link-color = {
+  main : '',// ссылка
+  main-hover : '',// ссылка при наведении
+  light : '',// ссылка светлая
+  light-hover : '',// ссылка светлая при наведении
+  dark : '',// ссылка темная
+  dark-hover : '',// ссылка темная при наведении
+}
+
+$border-color = {
+  border-main : '',// обводка
+  border-light : '',// обводка светлая
+  border-dark : ''// обводка темная
+}
+

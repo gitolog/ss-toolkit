@@ -14,12 +14,13 @@
   font-weight: 400;
   min-height: 200px;
   overflow: hidden;
-  width: 330px;
+  width: auto;
   z-index: 1;
   position: relative;
-  background: rgb(255, 255, 255);
+  background: $colors.bg-light ? $colors.bg-light : rgb(255, 255, 255);
   border-radius: 2px;
   box-sizing: border-box;
+  margin : 5px;
 
   &__media
     background-color: rgb(255, 64, 129);
@@ -35,7 +36,8 @@
     -webkit-align-items: center;
     -ms-flex-align: center;
     align-items: center;
-    color: rgb(0, 0, 0);
+    color: $colors.text-light ? $colors.text-light : rgb(0, 0, 0);
+    background: $colors.bg-main ? $colors.bg-main : rgb(255, 255, 255);
     display: block;
     display: -webkit-box;
     display: -webkit-flex;
@@ -54,7 +56,7 @@
     transform-origin: 165px 56px;
     box-sizing: border-box;
 
-  &__titlecard--border
+  &__title_border
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 
   &__title-text
@@ -76,12 +78,12 @@
     transform-origin: 149px 48px;
     margin: 0;
 
-  &__subtitle-text
+  &__subtitle
     font-size: 14px;
     color: grey;
     margin: 0;
 
-  &__supporting-text
+  &__text
     color: rgba(0, 0, 0, 0.54);
     font-size: 13px;
     line-height: 18px;
@@ -93,11 +95,12 @@
     font-size: 16px;
     line-height: normal;
     width: 100%;
-    background-color: transparent;
+    background-color: $colors.bg-main ? $colors.bg-main : transparent;
     padding: 8px;
     box-sizing: border-box;
-  &__actionscard--border
-    border-top: 1px solid rgba(0, 0, 0, 0.1);
+
+    &--border
+      border-top: 1px solid rgba(0, 0, 0, 0.1);
 
   &--expand
     -webkit-box-flex: 1;
