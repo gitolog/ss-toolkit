@@ -26,7 +26,7 @@ var path = {
     },
 
     out: { // Output path
-        js: buildDir + '/js',
+        js: buildDir + '/javascript',
         css: buildDir + '/css',
         img: buildDir + '/images',
         fonts: buildDir + '/fonts'
@@ -124,19 +124,21 @@ gulp.task('clean', function () {
     return del([ buildDir ]);
 });
 
-// Publication
-gulp.task('pub', function () {
-  return gulp.src( buildDir + '/**/*' )
-    .pipe(gulp.dest( pubDir ));
+// Copy to WWW
+gulp.task('copy', function(){
+    return gulp.src( buildDir + '/**/*' )
+        .pipe(gulp.dest( pubDir ));
+        //.pipe(plugins.notify("Copying to /www... <%= file.path %>"));
 });
 
 // Builder
-gulp.task('build', function (cb) {
+gulp.task('build', function () {
     // runSequence позволяет запускать задачи по порядку
-    runSequence('clean', // 1 выполнится первым
-        ['compile:css', 'compile:js'], // 2 (таски выполнятся впараллель)
+    runSequence(
+        ['clean'], // 1
+        ['compile:css', 'compile:js'], // 2
         ['minify:css', 'minify:js'], // 3
-        ['pub']
+        ['copy'] // 4
     );
 });
 
@@ -151,9 +153,21 @@ gulp.task('default', function () {
     gulp.watch([
         srcDir + '/**/*.styl',
         srcDir + '/**/*.css'
-    ], runSequence('compile:css', 'pub'));
+    ],  function () {
+        runSequence(
+            ['compile:css'],
+            ['minify:css'],
+            ['copy']
+        );
+    });
 
     // JS watcher
-    gulp.watch(srcDir + '/**/*.js', runSequence('compile:js', 'pub'));
+    gulp.watch(srcDir + '/**/*.js', function () {
+        runSequence(
+            ['compile:js'],
+            ['minify:js'],
+            ['copy']
+        );
+    });
 
 });

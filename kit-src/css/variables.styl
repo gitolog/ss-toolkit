@@ -1,49 +1,84 @@
-
+/***********************************************************************/
+/*                              FONTS                                  */
+/***********************************************************************/
 $font-family = Roboto, Arial, sans-serif
-$font-multiplier = 1.2
 
-$font-size = {
-  text : 16px,
-}
-$font-size = merge($font-size,{
-  text-less : ceil($font-size.text / $font-multiplier)
-  text-large : ceil($font-size.text * $font-multiplier)
-})
-
-$colors = {
-
-  text : {
-    main : gray,// основной текст
-    light : silver,// светлый текст
-    dark : black,// темный текст
+$font = {
+  size : {
+    text : 14px,   // Main
+    small : 0.8em, // Small text
+    large : 1.2em  // Large text
   }
-
-/*  title : {
-    main : $colors.text.main,// заголовковки
-    light : $colors.text.light,// заголовковки светлые
-    dark : $colors.text.dark,// заголовки темные
-  }*/
-
 }
 
-$bg-color = {
-  main : '',// основной фон
-  light : '',// светлый фон
-  dark : '',// темный фон
+/***********************************************************************/
+/*                              COLORS                                 */
+/***********************************************************************/
+/*------------------------- Text colors -------------------------------*/
+$color = {  // Text colors
+  text : {
+    main : gray,     // main text
+    light : silver,  // light text
+    dark : black,    // dark text
+  }
+}
+/*------------------------- Header colors -----------------------------*/
+$color = merge($color,{
+  header : {
+    main : $color.text.main,    // Main header color
+    light : $color.text.light,  // Light header color
+    dark : $color.text.dark,    // Dark header color
+  }
+});
+/*------------------------- Background colors -------------------------*/
+$color = merge($color,{
+  bg : {
+    main : '',// основной фон
+    light : '',// светлый фон
+    dark : '',// темный фон
+    accent : #ff4081
+  }
+});
+/*------------------------- Link colors -------------------------------*/
+$color = merge($color,{
+  link : {
+    main : '',            // Normal link color
+    main-hover : '',      // Normal hovered link color
+    light : '',           // Light link color
+    light-hover : '',     // Light hovered link hover
+    dark : '',           // Light link color
+    dark-hover : '',     // Light hovered link hover
+    accent : #ff4081,     // Accented link color
+    accent-hover : '',    // Accented hovered link hover
+  }
+});
+
+
+/***********************************************************************/
+/*                              BORDERS                                */
+/***********************************************************************/
+$border = {
+  style : {
+    main : solid,  // Основной стиль бордера
+    alter : dotted // Альтернативный стиль бордера
+  },
+  color : {
+    main : '',  // обводка
+    light : '', // обводка светлая
+    dark : ''   // обводка темная
+  },
+  width : {
+    main : 1px, // основной
+    alter : 2px // альтернативный
+  }
 }
 
-$link-color = {
-  main : '',// ссылка
-  main-hover : '',// ссылка при наведении
-  light : '',// ссылка светлая
-  light-hover : '',// ссылка светлая при наведении
-  dark : '',// ссылка темная
-  dark-hover : '',// ссылка темная при наведении
-}
 
-$border-color = {
-  border-main : '',// обводка
-  border-light : '',// обводка светлая
-  border-dark : ''// обводка темная
+/***********************************************************************/
+/*                              INDENTS                                */
+/***********************************************************************/
+// отступы (влияют и на padding и на margin)
+$indent = {
+  main : 5px, // основной
+  alter : 10px // альтернативный
 }
-

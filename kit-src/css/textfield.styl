@@ -1,0 +1,127 @@
+.textfield 
+  position: relative
+  font-size: $font.size.text
+  display: inline-block
+  box-sizing: border-box
+  width: 300px
+  max-width: 100%
+  margin: 0
+  padding: 20px 0 
+.textfield .button 
+  position: absolute
+  bottom: 20px 
+
+.textfield--align-right 
+  text-align: right 
+
+.textfield--full-width 
+  width: 100% 
+
+.textfield--expandable 
+  min-width: 32px
+  width: auto
+  min-height: 32px 
+
+.textfield__input 
+  border: none
+  border-bottom: 1px solid rgba(0,0,0, 0.12)
+  display: block
+  font-size: 16px
+  margin: 0
+  padding: 4px 0
+  width: 100%
+  background: none
+  text-align: left
+  color: inherit 
+.textfield.is-focused .textfield__input 
+  outline: none 
+.textfield.is-invalid .textfield__input 
+  border-color: rgb(222, 50, 38)
+  box-shadow: none 
+.textfield.is-disabled .textfield__input 
+  background-color: transparent
+  border-bottom: 1px dotted rgba(0,0,0, 0.12)
+  color: rgba(0,0,0, 0.26) 
+
+.textfield textarea.textfield__input 
+  display: block 
+
+.textfield__label 
+  bottom: 0
+  color: rgba(0,0,0, 0.26)
+  font-size: 16px
+  left: 0
+  right: 0
+  pointer-events: none
+  position: absolute
+  display: block
+  top: 24px
+  width: 100%
+  overflow: hidden
+  white-space: nowrap
+  text-align: left 
+.textfield.is-dirty .textfield__label 
+  visibility: hidden 
+.textfield--floating-label .textfield__label 
+  -webkit-transition-duration: 0.2s
+  transition-duration: 0.2s
+  -webkit-transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1)
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1) 
+.textfield.is-disabled.is-disabled .textfield__label 
+  color: rgba(0,0,0, 0.26) 
+.textfield--floating-label.is-focused .textfield__label,
+.textfield--floating-label.is-dirty .textfield__label 
+  color: rgb(63,81,181)
+  font-size: 12px
+  top: 4px
+  visibility: visible 
+.textfield--floating-label.is-focused .textfield__expandable-holder .textfield__label,
+.textfield--floating-label.is-dirty .textfield__expandable-holder .textfield__label 
+  top: -16px 
+.textfield--floating-label.is-invalid .textfield__label 
+  color: rgb(222, 50, 38)
+  font-size: 12px 
+.textfield__label:after 
+  background-color: rgb(63,81,181)
+  bottom: 20px
+  content: ''
+  height: 2px
+  left: 45%
+  position: absolute
+  -webkit-transition-duration: 0.2s
+  transition-duration: 0.2s
+  -webkit-transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1)
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1)
+  visibility: hidden
+  width: 10px 
+.textfield.is-focused .textfield__label:after 
+  left: 0
+  visibility: visible
+  width: 100% 
+.textfield.is-invalid .textfield__label:after 
+  background-color: rgb(222, 50, 38) 
+
+.textfield__error 
+  color: rgb(222, 50, 38)
+  position: absolute
+  font-size: 12px
+  margin-top: 3px
+  visibility: hidden
+  display: block 
+.textfield.is-invalid .textfield__error 
+  visibility: visible 
+
+.textfield__expandable-holder 
+  display: inline-block
+  position: relative
+  margin-left: 32px
+  -webkit-transition-duration: 0.2s
+  transition-duration: 0.2s
+  -webkit-transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1)
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1)
+  display: inline-block
+  max-width: 0.1px 
+.textfield.is-focused .textfield__expandable-holder, .textfield.is-dirty .textfield__expandable-holder 
+  max-width: 600px 
+.textfield__expandable-holder .textfield__label:after 
+  bottom: 0 

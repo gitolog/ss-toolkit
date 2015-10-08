@@ -3,7 +3,7 @@
 /lib
 /src
 /www
-/CVS
+CVS/
 /.idea
 .cvsignore
 deploy.properties
