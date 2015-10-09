@@ -18,15 +18,17 @@ var path = {
         js: srcDir + '/js',
         css: srcDir + '/css',
         img: srcDir + '/img',
+        icons: srcDir + '/icons',
         fonts: srcDir + '/fonts'
     },
+	
     vendor: { // Vendor dependant sources
         js: srcDir + '/js/vendor',
         css: srcDir + '/css/vendor'
     },
-
+	
     out: { // Output path
-        js: buildDir + '/javascript',
+        js: buildDir + '/js',
         css: buildDir + '/css',
         img: buildDir + '/images',
         fonts: buildDir + '/fonts'
@@ -86,6 +88,34 @@ gulp.task('minify:css', function () {
         .pipe(gulp.dest(path.out.css));
 });
 
+// Compile Icons Font
+gulp.task('compile:font', function(){
+	return gulp.src([
+		path.src.icons + '/*.svg'
+	])
+	.pipe(plugins.iconfontCss({
+		fontName: 'SST Icons',
+		path: path.src.icons + '/sst-icons.css',
+		targetPath: '../css/sst-icons.css',
+		fontPath: '../fonts/',
+		cssClass: kitPrefix + 'icon'
+	}))
+	.pipe(plugins.iconfont({
+		fontName: 'SST Icons',
+		appendUnicode: true,
+		fontWeight: 'normal',
+		fontStyle: 'normal',
+		//fixedWidth: '20',
+		fontHeight: '500',
+		round: 100,
+		descent: 75,
+		normalize: true,
+		centerHorizontally: true,
+		formats: ['ttf', 'eot', 'woff', 'woff2', 'svg']
+	}))
+	.pipe(gulp.dest(path.out.fonts));
+});
+
 // Compile JS
 gulp.task('compile:js', function () {
     return gulp.src([
@@ -136,7 +166,8 @@ gulp.task('build', function () {
     // runSequence позволяет запускать задачи по порядку
     runSequence(
         ['clean'], // 1
-        ['compile:css', 'compile:js'], // 2
+        ['compile:font'], // 2.0
+        ['compile:css', 'compile:js'], // 2.1
         ['minify:css', 'minify:js'], // 3
         ['copy'] // 4
     );
