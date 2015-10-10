@@ -8,6 +8,7 @@ $font = {
     text : 14px,   // Main
     small : 0.8em, // Small text
     large : 1.2em  // Large text
+    zero : 0px  // Zero text
   }
 }
 
@@ -33,17 +34,17 @@ $color = merge($color,{
 /*------------------------- Background colors -------------------------*/
 $color = merge($color,{
   bg : {
-    main : '',// основной фон
-    light : '',// светлый фон
-    dark : '',// темный фон
+    main : '',// РѕСЃРЅРѕРІРЅРѕР№ С„РѕРЅ
+    light : '',// СЃРІРµС‚Р»С‹Р№ С„РѕРЅ
+    dark : '',// С‚РµРјРЅС‹Р№ С„РѕРЅ
     accent : #ff4081
   }
 });
 /*------------------------- Link colors -------------------------------*/
 $color = merge($color,{
   link : {
-    main : '',            // Normal link color
-    main-hover : '',      // Normal hovered link color
+    main : blue,            // Normal link color
+    main-hover : violet,      // Normal hovered link color
     light : '',           // Light link color
     light-hover : '',     // Light hovered link hover
     dark : '',           // Light link color
@@ -59,17 +60,17 @@ $color = merge($color,{
 /***********************************************************************/
 $border = {
   style : {
-    main : solid,  // Основной стиль бордера
-    alter : dotted // Альтернативный стиль бордера
+    main : solid,  // РѕСЃРЅРѕРІРЅРѕР№ СЃС‚РёР»СЊ Р±РѕСЂРґРµСЂР°
+    alter : dotted // Р°Р»СЊС‚РµСЂРЅР°С‚РёРІРЅС‹Р№ СЃС‚РёР»СЊ Р±РѕСЂРґРµСЂР°
   },
   color : {
-    main : '',  // обводка
-    light : '', // обводка светлая
-    dark : ''   // обводка темная
+    main : '',  // РѕР±РІРѕРґРєР°
+    light : '', // РѕР±РІРѕРґРєР° СЃРІРµС‚Р»Р°СЏ
+    dark : ''   // РѕР±РІРѕРґРєР° С‚РµРјРЅР°СЏ
   },
   width : {
-    main : 1px, // основной
-    alter : 2px // альтернативный
+    main : 1px, // РѕСЃРЅРѕРІРЅРѕР№
+    alter : 2px // Р°Р»СЊС‚РµСЂРЅР°С‚РёРІРЅС‹Р№
   }
 }
 
@@ -77,8 +78,17 @@ $border = {
 /***********************************************************************/
 /*                              INDENTS                                */
 /***********************************************************************/
-// отступы (влияют и на padding и на margin)
+// РѕС‚СЃС‚СѓРїС‹ (РІР»РёСЏСЋС‚ Рё РЅР° padding Рё РЅР° margin)
+$rythm = {
+	single: 5px
+}
+$rythm.double = $rythm.single*2
+$rythm.triple = $rythm.single*3
+$rythm.quadro = $rythm.single*4
+$rythm.penta = $rythm.single*5
+$rythm.hexa = $rythm.single*6
+
 $indent = {
-  main : 5px, // основной
-  alter : 10px // альтернативный
+  main : $rythm.quadro, // РѕСЃРЅРѕРІРЅРѕР№
+  alter : $rythm.double // Р°Р»СЊС‚РµСЂРЅР°С‚РёРІРЅС‹Р№
 }

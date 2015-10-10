@@ -175,15 +175,15 @@ gulp.task('build', function () {
 
 
 // Watcher
-gulp.task('default', function () {
+gulp.task('watch', function () {
 
     // Notifies Livereload to reload browser if above tasks being runned
     plugins.livereload.listen();
-
+	
     // CSS watcher
     gulp.watch([
-        srcDir + '/**/*.styl',
-        srcDir + '/**/*.css'
+		path.src.css + '/*.styl',
+		path.src.css + '/*.css'
     ],  function () {
         runSequence(
             ['compile:css'],
@@ -193,7 +193,7 @@ gulp.task('default', function () {
     });
 
     // JS watcher
-    gulp.watch(srcDir + '/**/*.js', function () {
+    gulp.watch(path.src.js + '/*.js', function () {
         runSequence(
             ['compile:js'],
             ['minify:js'],

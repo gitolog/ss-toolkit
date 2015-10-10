@@ -1,4 +1,3 @@
-
 .text
   &_center
     text-align: center
@@ -18,7 +17,8 @@
     float: none
 
 .clearfix
-  &::after
+  &:after
+  &:before
     content: "."
     display: table
     height: 0
@@ -29,6 +29,14 @@
   display: none
 
 /* Paddings */
+.padding
+	padding: $indent.main
+.margin--neg
+	padding-left: 0 !important
+	padding-right: 0 !important
+	margin-left: -($indent.main)
+	margin-right: -($indent.main)
+
 for i in range(1, 10, 1)
   .pad_{i*5}
     padding: 5px * i
