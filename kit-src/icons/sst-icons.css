@@ -20,7 +20,7 @@
 }
 
 <% _.each(glyphs, function(glyph) {%>
-	.<%= cssClass %>__<%= glyph.fileName.replace(/[0-9\-]/g, "") %>:before {
-		content: "\<%= glyph.codePoint %>";
-	}
+.<%= cssClass %>--<%= glyph.fileName.replace(/[0-9\-]/g, "") %>:before {
+	content: "\<%= glyph.codePoint %>";
+}
 <% }); %>
