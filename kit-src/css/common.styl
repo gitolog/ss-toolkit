@@ -4,20 +4,21 @@ body {
   font-size : $font.size.text
   color : $color.text.main
 }
+h1, h2, h3, h4, h5, h6, .titleH1, .titleH2, .titleH3, .titleH4 {
+	font-family: $font-family
+	color: $color.text.dark;
+}
+a, a:visited, a:focus {
+	color: $color.link.main;
+}
+a:hover, a:visited:hover, a:focus:hover,
+a:active, a:visited:active, a:focus:active {
+	color: $color.link.main-hover;
+}
+
 .wrapper {
 	overflow: hidden;
 }
-.section {
-}
-.center_block {
-	position: relative;
-	margin: 0 auto;
-}
-.clearfix:after {
-	display: block;
-	content: ' ';
-	clear: both;
-	width: 0;
-	height: 0;
-	visibility: hidden;
+.text {
+	line-height: 1.3;
 }

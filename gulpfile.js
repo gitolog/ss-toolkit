@@ -1,65 +1,109 @@
 'use strict';
 
+// Plugin definition
+var del = require('del');
+var gulp = require('gulp');
+var gulpLoadPlugins = require('gulp-load-plugins');
+var plugins = gulpLoadPlugins();
+// Other plugins with not a 'gulp-***' names
+var imageminPngquant = require('imagemin-pngquant');
+var runSequence = require('run-sequence');
+
+// Kit name definition
+var kitPrefix = 'sst-',
+    fontName = 'SST Icons';
+
+// Paths definition
 var srcDir = './kit-src',
     buildDir = './build',
     pubDir = './www',
-    kitPrefix = 'sst-',
+    path = {
+        src: { // Sources
+            js: srcDir + '/js',
+            css: srcDir + '/css',
+            img: srcDir + '/img',
+            icons: srcDir + '/icons',
+            fonts: srcDir + '/fonts'
+        },
 
-    // Plugin definition
-    del = require('del'),
-    gulp = require('gulp'),
-    gulpLoadPlugins = require('gulp-load-plugins'),
-    plugins = gulpLoadPlugins(),
-    imageminPngquant = require('imagemin-pngquant'),
-    runSequence = require('run-sequence');
+        vendor: { // Vendor dependant sources
+            js: srcDir + '/js/vendor',
+            css: srcDir + '/css/vendor'
+        },
 
-var path = {
-    src: { // Sources
-        js: srcDir + '/js',
-        css: srcDir + '/css',
-        img: srcDir + '/img',
-        icons: srcDir + '/icons',
-        fonts: srcDir + '/fonts'
-    },
-	
-    vendor: { // Vendor dependant sources
-        js: srcDir + '/js/vendor',
-        css: srcDir + '/css/vendor'
-    },
-	
-    out: { // Output path
-        js: buildDir + '/js',
-        css: buildDir + '/css',
-        img: buildDir + '/images',
-        fonts: buildDir + '/fonts'
-    }
-};
+        out: { // Output path
+            js: buildDir + '/js',
+            css: buildDir + '/css',
+            img: buildDir + '/images',
+            fonts: buildDir + '/fonts'
+        }
+    };
+
+// Icon font glyphs will be saved here
+var _glyphs = {};
 
 //--------------------------------------------------------------
 //    TASKS
 //--------------------------------------------------------------
 
+// Compile Icon Font
+gulp.task('compile:font', function(){
+    return gulp.src([
+        path.src.icons + '/*.svg'
+    ])
+    .pipe(plugins.iconfont({
+        fontName: fontName,
+        fontWeight: 'normal',
+        fontStyle: 'normal',
+        //fixedWidth: '20',
+        fontHeight: '500',
+        round: 100,
+        descent: 75,
+        normalize: true,
+        centerHorizontally: true,
+        formats: ['ttf', 'eot', 'woff', 'woff2', 'svg']
+    }))
+    // Glyphs for Stylus iconfont CSS part creation
+    .on('glyphs', function(glyphs, options) {
+        // Modifying glyph names and codes to CSS format
+        glyphs.forEach(function(glyph) {
+            glyph.name = glyph.name.replace(/[0-9\-]/g, ""); // Replace digits from names
+            glyph.unicode = glyph.unicode[0].charCodeAt(0).toString(16).toUpperCase(); // Transform Unicode to ASCII code
+        });
+        _glyphs = glyphs;
+    })
+    .pipe(gulp.dest(path.out.fonts));
+});
+
 // Compile CSS
 gulp.task('compile:css', function () {
+    // console.log(_glyphs);
     return gulp.src(srcDir + '/toolkit.styl')
-        .pipe(plugins.stylus({ // Compiles Stylus
+        .pipe(plugins.stylus({
+            // Sending IconFont glyphs to Stylus
+            define: {
+                $fontName: fontName,
+                $fontPath: '../fonts/',
+                $iconClass : 'icon',
+                $glyphs: _glyphs
+            },
             'include css': true,
-            'prefix' : kitPrefix // Adding prefix to all CSS classes
+            'prefix' : kitPrefix // Toolkit prefix for all CSS classes
         }))
-        .pipe(plugins.autoprefixer({ // Adding CSS vendor prefixes according to www.Caniuse.com
-                browsers: [
-                    '> 1%',
-                    'last 2 versions',
-                    'firefox >= 4',
-                    'safari 7',
-                    'safari 8',
-                    'IE 8',
-                    'IE 9',
-                    'IE 10',
-                    'IE 11'
-                ], cascade: false
-            })
-        )
+        .pipe(plugins.autoprefixer({
+            // Adds vendor CSS prefixes according to www.Caniuse.com
+            browsers: [
+                '> 1%',
+                'last 2 versions',
+                'firefox >= 4',
+                'safari 7',
+                'safari 8',
+                'IE 8',
+                'IE 9',
+                'IE 10',
+                'IE 11'
+            ], cascade: false
+        }))
         .pipe(plugins.rename({prefix: kitPrefix}))
         .pipe(gulp.dest(path.out.css))
         .pipe(plugins.livereload());
@@ -88,33 +132,6 @@ gulp.task('minify:css', function () {
         .pipe(gulp.dest(path.out.css));
 });
 
-// Compile Icons Font
-gulp.task('compile:font', function(){
-	return gulp.src([
-		path.src.icons + '/*.svg'
-	])
-	.pipe(plugins.iconfontCss({
-		fontName: 'SST Icons',
-		path: path.src.icons + '/sst-icons.css',
-		targetPath: '../css/sst-icons.css',
-		fontPath: '../fonts/',
-		cssClass: kitPrefix + 'icon'
-	}))
-	.pipe(plugins.iconfont({
-		fontName: 'SST Icons',
-		appendUnicode: true,
-		fontWeight: 'normal',
-		fontStyle: 'normal',
-		//fixedWidth: '20',
-		fontHeight: '500',
-		round: 100,
-		descent: 75,
-		normalize: true,
-		centerHorizontally: true,
-		formats: ['ttf', 'eot', 'woff', 'woff2', 'svg']
-	}))
-	.pipe(gulp.dest(path.out.fonts));
-});
 
 // Compile JS
 gulp.task('compile:js', function () {
@@ -135,7 +152,6 @@ gulp.task('minify:js', function () {
     ])
         .pipe(plugins.uglify())
         .pipe(plugins.rename({suffix: '.min'}))
-        //.pipe(plugins.convertEncoding({to: 'cp1251'}))
         .pipe(gulp.dest(path.out.js));
 });
 
@@ -166,24 +182,23 @@ gulp.task('build', function () {
     // runSequence позволяет запускать задачи по порядку
     runSequence(
         ['clean'], // 1
-        ['compile:font'], // 2.0
-        ['compile:css', 'compile:js'], // 2.1
-        ['minify:css', 'minify:js'], // 3
-        ['copy'] // 4
+        ['compile:font'], // 2
+        ['compile:css', 'compile:js'], // 3
+        ['minify:css', 'minify:js'], // 4
+        ['copy'] // 5
     );
 });
 
 
 // Watcher
-gulp.task('default', function () {
-
+gulp.task('default', ['compile:font'], function () {
     // Notifies Livereload to reload browser if above tasks being runned
     plugins.livereload.listen();
-
+	
     // CSS watcher
     gulp.watch([
-        srcDir + '/**/*.styl',
-        srcDir + '/**/*.css'
+		path.src.css + '/*.styl',
+		path.src.css + '/*.css'
     ],  function () {
         runSequence(
             ['compile:css'],
@@ -193,7 +208,7 @@ gulp.task('default', function () {
     });
 
     // JS watcher
-    gulp.watch(srcDir + '/**/*.js', function () {
+    gulp.watch(path.src.js + '/*.js', function () {
         runSequence(
             ['compile:js'],
             ['minify:js'],
