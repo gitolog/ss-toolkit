@@ -8,7 +8,6 @@ var plugins = gulpLoadPlugins();
 // Other plugins with not a 'gulp-***' names
 var imageminPngquant = require('imagemin-pngquant');
 var runSequence = require('run-sequence');
-//var stylus = require('gulp-stylus');
 
 // Kit name definition
 var kitPrefix = 'sst-',
@@ -40,13 +39,14 @@ var srcDir = './kit-src',
         }
     };
 
+// Icon font glyphs will be saved here
 var _glyphs = {};
 
 //--------------------------------------------------------------
 //    TASKS
 //--------------------------------------------------------------
 
-// Compile Icons Font
+// Compile Icon Font
 gulp.task('compile:font', function(){
     return gulp.src([
         path.src.icons + '/*.svg'
@@ -68,7 +68,7 @@ gulp.task('compile:font', function(){
         // Modifying glyph names and codes to CSS format
         glyphs.forEach(function(glyph) {
             glyph.name = glyph.name.replace(/[0-9\-]/g, ""); // Replace digits from names
-            glyph.unicode = glyph.unicode[0].charCodeAt(0).toString(16).toUpperCase(); // Transform to UTF
+            glyph.unicode = glyph.unicode[0].charCodeAt(0).toString(16).toUpperCase(); // Transform Unicode to ASCII code
         });
         _glyphs = glyphs;
     })
