@@ -11,7 +11,7 @@ var runSequence = require('run-sequence');
 
 // Kit name definition
 var kitPrefix = 'sst-',
-    fontName = 'SST Icons';
+    iconFontName = kitPrefix+'icons';
 
 // Paths definition
 var srcDir = './kit-src',
@@ -52,7 +52,7 @@ gulp.task('compile:font', function(){
         path.src.icons + '/*.svg'
     ])
     .pipe(plugins.iconfont({
-        fontName: fontName,
+        fontName: iconFontName,
         fontWeight: 'normal',
         fontStyle: 'normal',
         //fixedWidth: '20',
@@ -67,7 +67,9 @@ gulp.task('compile:font', function(){
     .on('glyphs', function(glyphs, options) {
         // Modifying glyph names and codes to CSS format
         glyphs.forEach(function(glyph) {
-            glyph.name = glyph.name.replace(/[0-9\-]/g, ""); // Replace digits from names
+            glyph.name = glyph.name.replace(/^[0-9\-]+/g, ""); // Replace digits from names
+            glyph.name = glyph.name.replace(/\__/g, "-"); // Replace "__" with "_" in names
+            glyph.name = glyph.name.replace(/\--/g, "-"); // Replace "--" with "_" in names
             glyph.unicode = glyph.unicode[0].charCodeAt(0).toString(16).toUpperCase(); // Transform Unicode to ASCII code
         });
         _glyphs = glyphs;
@@ -82,7 +84,7 @@ gulp.task('compile:css', function () {
         .pipe(plugins.stylus({
             // Sending IconFont glyphs to Stylus
             define: {
-                $fontName: fontName,
+                $fontName: iconFontName,
                 $fontPath: '../fonts/',
                 $iconClass : 'icon',
                 $glyphs: _glyphs
