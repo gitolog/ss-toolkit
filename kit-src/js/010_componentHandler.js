@@ -166,5 +166,5 @@ var sstComponentHandler = (function() {
 window.addEventListener('load', function() {
     'use strict';
 
-    componentHandler.upgradeAllRegistered();
+    sstComponentHandler.upgradeAllRegistered();
 });
