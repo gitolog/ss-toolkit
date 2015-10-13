@@ -1,19 +1,19 @@
-.text
-  &_center
+.align
+  &--center
     text-align: center
-  &_left
+  &--left
     text-align: left
-  &_right
+  &--right
     text-align: right
-  &_justify
+  &--justify
     text-align: justify
 
 .float
-  &_left
+  &--left
     float: left
-  &_right
+  &--right
     float: right
-  &_none
+  &--none
     float: none
 
 .clearfix
@@ -38,5 +38,5 @@
 	margin-right: -($indent.main)
 
 for i in range(1, 10, 1)
-  .pad_{i*5}
+  .pad-{i*5}
     padding: 5px * i
