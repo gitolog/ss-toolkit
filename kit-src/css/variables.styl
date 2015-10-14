@@ -1,16 +1,28 @@
+
+/***********************************************************************/
+/*                               RYTHM                                 */
+/***********************************************************************/
+// отступы (влияют и на padding и на margin)
+$rythm = 5px
+
+$indent = {
+  main : $rythm*4, // основной (20px)
+  alter : $rythm*2 // альтернативный (10px)
+}
+
+
 /***********************************************************************/
 /*                              FONTS                                  */
 /***********************************************************************/
-$font-family = Roboto, Arial, sans-serif
+$font = {}
 
-$font = {
-  size : {
-    text : 14px,   // Main
-    small : 0.8em, // Small text
-    large : 1.2em  // Large text
-    zero : 0px  // Zero text
-  }
-}
+$font.family = {}
+$font.family.text = Roboto, Arial, sans-serif
+$font.family.title = $font.family.text
+
+$font.size = {}
+$font.size.text = 14px
+
 
 /***********************************************************************/
 /*                              COLORS                                 */
@@ -18,9 +30,9 @@ $font = {
 /*------------------------- Text colors -------------------------------*/
 $color = {  // Text colors
   text : {
-    main : gray,     // main text
-    light : silver,  // light text
-    dark : black,    // dark text
+    main : #444,     // main text
+    light : #888,    // light text
+    dark : #000,     // dark text
   }
 }
 /*------------------------- Header colors -----------------------------*/
@@ -72,23 +84,4 @@ $border = {
     main : 1px, // основной
     alter : 2px // альтернативный
   }
-}
-
-
-/***********************************************************************/
-/*                              INDENTS                                */
-/***********************************************************************/
-// отступы (влияют и на padding и на margin)
-$rythm = {
-	single: 5px
-}
-$rythm.double = $rythm.single*2
-$rythm.triple = $rythm.single*3
-$rythm.quadro = $rythm.single*4
-$rythm.penta = $rythm.single*5
-$rythm.hexa = $rythm.single*6
-
-$indent = {
-  main : $rythm.quadro, // основной
-  alter : $rythm.double // альтернативный
 }

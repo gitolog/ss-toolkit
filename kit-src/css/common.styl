@@ -1,31 +1,103 @@
 /*  SST Common styles */
-body {
-  font-family : $font-family
-  font-size : $font.size.text
-  color : $color.text.main
-}
-h1, h2, h3, h4, h5, h6, .title--h1, .title--h2, .title--h3, .title--h4 {
-	font-family: $font-family
-	color: $color.text.dark;
-}
-a, a:visited, a:focus {
-	color: $color.link.main;
-}
-a:hover, a:visited:hover, a:focus:hover,
-a:active, a:visited:active, a:focus:active {
-	color: $color.link.main-hover;
+body
+	background: #fff
+	font-family : $font.family.text
+	color : $color.text.main
+	overflow-y: scroll
+
+h1, h2, h3, h4, h5, h6, .title--h1, .title--h2, .title--h3, .title--h4
+	font-weight: bold
+	font-family: $font.family.title
+	color: $color.text.dark
+	padding: $rythm*2 0 0
+	margin: 0 0 $rythm*2
+	display: block
+
+p
+	margin: $rythm*2 0
+	hyphens: auto;
+
+body, h4,
+.text, .title--h4, .col {
+	font-size: 14px
+	line-height: $rythm*4
 }
 
-.wrapper {
-	overflow: hidden;
-}
-.text {
-	line-height: 1.3;
-}
+h3, .title--h3
+	font-size: 17px
+	line-height: 20px
+h2, .title--h2
+	font-size: 25px
+	line-height: 25px
+h1, .title--h1
+	font-size: 35px
+	line-height: 35px
+
+ // Plain text
+.text
+	&--s
+		font-size: 11px
+		line-height: $rythm*3
+	&--l
+		font-size: 17px
+		line-height: $rythm*5
+	&--xl
+		font-size: 21px
+		line-height: $rythm*6
+	&--xxl
+		font-size: 25px
+		line-height: $rythm*7
+	&--monster
+		font-size: 30px
+		line-height: $rythm*8
+
+// icon width fixes
+.text--s .icon:before
+	width: $rythm*3
+.text--l .icon:before
+	width: $rythm*5
+.text--xl .icon:before
+	width: $rythm*6
+.text--xxl .icon:before
+	width: $rythm*7
+.text--monster .icon:before
+	width: $rythm*8
+
+.icon--s:before
+	font-size: 11px;
+	width: 15px;
+.icon--l:before
+	font-size: 17px;
+	width: 25px;
+.icon--xl:before
+	font-size: 25px;
+	width: 35px;
+.icon--xxl:before
+	font-size: 40px;
+	width: 50px;
+.icon--monster:before
+	font-size: 55px;
+	width: 70px;
+
+a, a:visited, a:focus
+	color: $color.link.main
+
+a:hover, a:visited:hover, a:focus:hover,
+a:active, a:visited:active, a:focus:active
+	color: $color.link.main-hover;
+
+
+ul, ol
+	margin: $rythm*2 0
+	padding: 0 0 0 $rythm*4
+
+.wrapper
+	overflow: hidden
   
 /* Remove the unwanted box around FAB buttons */
 /* More info: http://goo.gl/IPwKi */
 a, .accordion, .button, .card, .checkbox, .dropdown-menu,
-.icon-toggle, .item, .radio, .slider, .switch, .tabs__tab
-  -webkit-tap-highlight-color: transparent
-  -webkit-tap-highlight-color: rgba(255, 255, 255, 0)
+.icon-toggle, .item, .radio, .slider, .switch, .tabs__tab {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+}
