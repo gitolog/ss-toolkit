@@ -1,0 +1,75 @@
+
+.icon-toggle
+  position: relative
+  z-index: 1
+  vertical-align: middle
+  display: inline-block
+  height: 32px
+  margin: 0
+  padding: 0
+
+.icon-toggle__input
+  line-height: 32px
+.icon-toggle.is-upgraded .icon-toggle__input
+  position: absolute
+  width: 0
+  height: 0
+  margin: 0
+  padding: 0
+  opacity: 0
+  -ms-appearance: none
+  -moz-appearance: none
+  -webkit-appearance: none
+  appearance: none
+  border: none
+
+.icon-toggle__label
+  display: inline-block
+  position: relative
+  cursor: pointer
+  height: 32px
+  width: 32px
+  min-width: 32px
+  color: rgb(97,97,97)
+  border-radius: 50%
+  padding: 0
+  margin-left: 0
+  margin-right: 0
+  text-align: center
+  background-color: transparent
+  will-change: background-color
+  -webkit-transition: background-color 0.2s cubic-bezier(0.4, 0, 0.2, 1), color 0.2s cubic-bezier(0.4, 0, 0.2, 1)
+  transition: background-color 0.2s cubic-bezier(0.4, 0, 0.2, 1), color 0.2s cubic-bezier(0.4, 0, 0.2, 1)
+.icon-toggle__label.material-icons
+  line-height: 32px
+  font-size: 24px
+.icon-toggle.is-checked .icon-toggle__label
+  color: rgb(63,81,181)
+.icon-toggle.is-disabled .icon-toggle__label
+  color: rgba(0,0,0, 0.26)
+  cursor: auto
+  -webkit-transition: none
+  transition: none
+.icon-toggle.is-focused .icon-toggle__label
+  background-color: rgba(0,0,0, 0.12)
+.icon-toggle.is-focused.is-checked .icon-toggle__label
+  background-color: rgba(63,81,181, 0.26)
+
+.icon-toggle__ripple-container
+  position: absolute
+  z-index: 2
+  top: -2px
+  left: -2px
+  box-sizing: border-box
+  width: 36px
+  height: 36px
+  border-radius: 50%
+  cursor: pointer
+  overflow: hidden
+  -webkit-mask-image: -webkit-radial-gradient(circle, white, black)
+.icon-toggle__ripple-container .ripple
+  background: rgb(97,97,97)
+.icon-toggle.is-disabled .icon-toggle__ripple-container
+  cursor: auto
+.icon-toggle.is-disabled .icon-toggle__ripple-container .ripple
+  background: transparent
