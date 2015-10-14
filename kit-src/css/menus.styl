@@ -1,29 +1,30 @@
 .menu
-
-.menu--horiz
-	margin 0
-	padding 0
-
 .menu__item
 	inline-block()
-	
-.menu--horiz ul a
+.menu__item > a
+
+
+// HORIZONTAL
+.menu--horizontal
+	padding: 0
+	margin: 0
+.menu--horizontal .menu__item > a
 	display: block;
 	box-sizing: border-box
-	padding: 0 $indent.main
-	line-height: $rythm.hexa
+	line-height: $rythm.quadro
+	padding: $rythm.single $indent.main
 	text-decoration: none
-	text-transform: uppercase;
 	
 // Header Menu
-.header__menu ul
-	inline-block()
-.header__menu ul a
+.menu--header
+	text-align: left
+.menu--header .menu__item > a
+	padding-bottom: $rythm.single - 2px
 	border-bottom: 2px solid rgba(255,255,255,0);
-.header__menu ul li:hover > a,
-.header__menu ul li.active > a
+.menu--header .menu__item:hover > a
+.menu--header .menu__item.active > a
 	border-bottom-color: rgba(255,255,255,1);
-	
+
 // Header Pop-Up Menu
 .header__popup-menu
 	inline-block()
