@@ -1,6 +1,6 @@
 /**
  * Class constructor for Ripple component.
- * Implements MDL component design pattern defined at:
+ * Implements component design pattern defined at:
  * https://github.com/jasonmayes/sst-component-design-pattern
  *
  * @constructor
@@ -161,7 +161,7 @@ SSTRipple.prototype.init = function () {
     }
 };
 
-SSTRipple.prototype.mdlDowngrade_ = function () {
+SSTRipple.prototype.sstDowngrade_ = function () {
     this.element_.removeEventListener('mousedown', this.boundDownHandler);
     this.element_.removeEventListener('touchstart', this.boundDownHandler);
     this.element_.removeEventListener('mouseup', this.boundUpHandler);
@@ -169,9 +169,8 @@ SSTRipple.prototype.mdlDowngrade_ = function () {
     this.element_.removeEventListener('touchend', this.boundUpHandler);
     this.element_.removeEventListener('blur', this.boundUpHandler);
 };
-// The component registers itself. It can assume componentHandler is available
-// in the global scope.
-componentHandler.register({
+
+sstComponentHandler.register({
     constructor: SSTRipple,
     classAsString: 'SSTRipple',
     cssClass: 'sst-js-ripple-effect',

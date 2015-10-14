@@ -68,8 +68,8 @@ gulp.task('compile:font', function(){
         // Modifying glyph names and codes to CSS format
         glyphs.forEach(function(glyph) {
             glyph.name = glyph.name.replace(/^[0-9\-]+/g, ""); // Replace digits from names
-            glyph.name = glyph.name.replace(/\__/g, "-"); // Replace "__" with "_" in names
-            glyph.name = glyph.name.replace(/\--/g, "-"); // Replace "--" with "_" in names
+            glyph.name = glyph.name.replace(/__/g, "-"); // Replace "__" with "-" in names
+            glyph.name = glyph.name.replace(/--/g, "-"); // Replace "--" with "-" in names
             glyph.unicode = glyph.unicode[0].charCodeAt(0).toString(16).toUpperCase(); // Transform Unicode to ASCII code
         });
         _glyphs = glyphs;
@@ -149,10 +149,11 @@ gulp.task('compile:js', function () {
 // Minify JS
 gulp.task('minify:js', function () {
     return gulp.src([
-        path.out.js + '/common.js',
-        path.out.js + '/vendor.js'
+        path.out.js + '/*.js'
     ])
-        .pipe(plugins.uglify())
+        .pipe(plugins.uglify({
+            mangle: true
+        }))
         .pipe(plugins.rename({suffix: '.min'}))
         .pipe(gulp.dest(path.out.js));
 });
