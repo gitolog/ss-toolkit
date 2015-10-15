@@ -30,13 +30,23 @@
 
 /* Paddings */
 .padding
-	padding: $indent.main
+	padding: $indent
+	&--half
+		padding: ($indent/2)
+	&--double
+		padding: ($indent*2)
+		
+.margin
+	margin: $indent
+	&--half
+		margin: ($indent/2)
+	&--double
+		margin: ($indent*2)
+
 .margin--neg
-	padding-left: 0 !important
-	padding-right: 0 !important
-	margin-left: -($indent.main)
-	margin-right: -($indent.main)
+	margin-left: -($indent)
+	margin-right: -($indent)
 
 for i in range(0, 10, 1)
-  .pad-{i*5}
-    padding: 5px * i
+  .padding--{i*$rythm}
+    padding: ($rythm * i)
