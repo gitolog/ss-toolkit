@@ -24,44 +24,68 @@ $font.size.text = 14px
 /***********************************************************************/
 /*                              COLORS                                 */
 /***********************************************************************/
-/*------------------------- Text colors -------------------------------*/
-$color = {  // Text colors
-  text : {
-    main : #444,     // main text
-    light : #888,    // light text
-    dark : #000,     // dark text
-  }
-}
-/*------------------------- Header colors -----------------------------*/
-$color = merge($color,{
-  header : {
-    main : $color.text.main,    // Main header color
-    light : $color.text.light,  // Light header color
-    dark : $color.text.dark,    // Dark header color
-  }
-});
-/*------------------------- Background colors -------------------------*/
-$color = merge($color,{
-  bg : {
-    main : '',// основной фон
-    light : '',// светлый фон
-    dark : '',// темный фон
-    accent : #ff4081
-  }
-});
-/*------------------------- Link colors -------------------------------*/
-$color = merge($color,{
-  link : {
-    main : blue,            // Normal link color
-    main-hover : violet,      // Normal hovered link color
-    light : '',           // Light link color
-    light-hover : '',     // Light hovered link hover
-    dark : '',           // Light link color
-    dark-hover : '',     // Light hovered link hover
-    accent : #ff4081,     // Accented link color
-    accent-hover : '',    // Accented hovered link hover
-  }
-});
+$color = {}
+
+
+//--- text
+$color.text = {}
+$color.text.main = #444
+$color.text.light = #888
+$color.text.dark = #000
+
+//--- links
+$color.link = {}
+$color.link.main = #ff4081
+$color.link.main-hover = #ff0057
+
+//--- header
+$color.header = {}
+$color.header.bg = #0037a6
+$color.header.text = #fff
+$color.header.link = $color.link.main
+$color.header.link-hover = $color.link.main-hover
+
+//--- footer
+$color.footer = {}
+$color.footer.bg = #424242
+$color.footer.text = #fff
+$color.footer.link = $color.link.main
+$color.footer.link-hover = $color.link.main-hover
+
+//--- content
+$color.content = {}
+$color.content.bg = #fff
+$color.content.text = $color.text.main
+$color.content.link = $color.link.main
+$color.content.link-hover = $color.link.main-hover
+
+//--- block
+$color.block = {}
+$color.block.main = {}
+$color.block.main.bg = #bbb
+$color.block.main.text = #444
+$color.block.light = {}
+$color.block.light.bg = #ddd
+$color.block.light.text = #444
+$color.block.dark = {}
+$color.block.dark.bg = #444
+$color.block.dark.text = #fff
+
+
+//--- infoline
+$color.infoline = {}
+
+$color.infoline.top = {}
+$color.infoline.top.bg = #000
+$color.infoline.top.text = #fff
+$color.infoline.top.link = $color.infoline.top.text
+$color.infoline.top.link-hover = $color.link.main-hover
+
+$color.infoline.bot = {}
+$color.infoline.bot.bg = $color.infoline.top.bg
+$color.infoline.bot.text = $color.infoline.top.text
+$color.infoline.bot.link = $color.infoline.bot.text
+$color.infoline.bot.link-hover = $color.link.main-hover
 
 
 /***********************************************************************/
