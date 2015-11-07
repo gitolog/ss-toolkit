@@ -214,7 +214,7 @@ gulp.task('default', ['compile:font'], function () {
     gulp.watch(path.src.js + '/*.js', function () {
         runSequence(
             ['compile:js'],
-            ['minify:js'],
+            //['minify:js'],
             ['copy']
         );
     });

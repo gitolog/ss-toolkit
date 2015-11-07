@@ -1,0 +1,55 @@
+/**
+ *
+ */
+.multiple
+  position: relative
+  /*
+  background: white
+  border: 1px #347EB7 solid
+  border-radius: 4px
+  height: 40px
+  */
+
+
+/*.multiple > div
+  height: 40px*/
+
+
+.multiple > div:last-child > div
+  right: 0
+
+
+/*.multiple input[type=range]
+  margin:0
+  padding:0
+  width: 100%
+  height:  inherit
+  -webkit-appearance: none
+  background: transparent*/
+
+
+.multiple > .multiple-one
+  overflow: hidden
+  position: absolute
+  z-index: 3
+  min-width: 1px
+
+
+.multiple > .multiple-two
+  position: absolute
+  z-index: 2
+
+
+.multiple input[type=range]:focus
+  outline: none
+
+
+.multiple > div, .multiple > div > div
+  height: inherit
+
+.multiple-one .slider__background-flex > .slider__background-lower
+  background-color: #BDBDBD
+.multiple-one .slider__background-flex > .slider__background-upper
+  background-color: transparent
+
+
